@@ -23,12 +23,12 @@ def send_email(amount):
 	)
 
 def get_chocolate_price():
+	# TODO: Add error handling and notification system for when this URL fails
 	r = requests.get('https://shop.coles.com.au/search/resources/store/20601/productview/bySeoUrlKeyword/green-blacks-organic-85%25-dark-chocolate?catalogId=10576')
 
 	data = r.json()
 
-	# get chocolate value, alternatively do a string regex if the object names change on website updates
-	return 3.5#float(data['catalogEntryView'][0]['p1']['o'])
+	return float(data['catalogEntryView'][0]['p1']['o'])
 
 
 ############
@@ -39,6 +39,7 @@ value = get_chocolate_price()
 
 if value < 4:
 	print("It's on sale! The price is $%s" % value)
+	# TODO: Only send an email once per sale period
 	print(send_email(value))
 else:
 	print("No sale :( price is $%s" % value)
