@@ -7,7 +7,7 @@ SALE_KEY = 'wasOnSale'
 MAX_SALE_PRICE = 4
 
 def send_email(amount):
-	API_KEY = os.environ.get('MAILING_LIST')
+	API_KEY = os.environ.get('API_KEY')
 	DOMAIN_NAME = os.environ.get('DOMAIN_NAME')
 	EMAIL_LIST = os.environ.get('EMAIL_LIST')
 
