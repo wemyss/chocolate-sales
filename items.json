@@ -1,0 +1,30 @@
+{
+	"coles_url_prefix": "https://shop.coles.com.au/search/resources/store/20601/productview/bySeoUrlKeyword/",
+	"woolworths_url_prefix": "https://www.woolworths.com.au/apis/ui/product/detail/",
+
+	"items": [
+		{
+			"name": "Green & Blacks 85% Chocolate",
+			"coles_url": "green-blacks-organic-85%25-dark-chocolate?catalogId=10576"
+		},
+		{
+			"name": "Supercoat: Active with Real Kangaroo Dry Dog Food (7.5kg)",
+			"coles_url": "purina-dog-food-supercoat-adult-petcare-active?catalogId=10576",
+			"woolworths_url": "516942"
+		},
+		{
+			"name": "Supercoat: Adult Lifecycle Chicken Dry Dog Food (7.5kg)",
+			"coles_url": "supercoat-adult--dog-food-with-real-chicken?catalogId=10576",
+			"woolworths_url": "517306"
+		},
+		{
+			"name": "Supercoat: Real Beef Dry Dog Food (7.5kg)",
+			"coles_url": "supercoat-adult-dog-food-with-real-beef?catalogId=10576",
+			"woolworths_url": "516945"
+		},
+		{
+			"name": "Supercoat: Large Breed with Real Chicken Dog Food (7.5kg)",
+			"coles_url": "supercoat-dog-food-large-breed?catalogId=10576"
+		}
+	]
+}
