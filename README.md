@@ -1,14 +1,33 @@
-# Chocolate sales email notifications
+# Supermarket sales email notifications
 
-![Dark 85% Green & Blacks Chocolate](http://i6.goodness-direct.co.uk/d/591836b.jpg)
+<img src="http://i6.goodness-direct.co.uk/d/591836b.jpg" alt="Dark 85% Green & Blacks Chocolate" height="300px"></img>
+<img src="https://cdn0.woolworths.media/content/wowproductimages/large/516942.jpg" alt="Supercoat Active Dry Dog Food" height="300px"></img>
 
 ---
 
 ## Overview
 
-Simple python script that runs on a heroku scheduled worker - sending an email to a mailgun mailing list if green & blacks chocolate is on sale.
+Simple python script that runs on a heroku scheduled worker once a day - sending emails to registered users that are interested in particular items being on sale.
 
-Uses DynamoDB to store result of previous scheduled worker that way we do not keep sending emails about the same chocolate sale. The sale has to end before the emails are sent again. Little bit over engineered but hey, it's free!
+Uses DynamoDB to store the previous price so we don't continually send emails and we can detect price drops.
+
+## DB layout
+```js
+// Users table example item
+{
+  email: 'my@email.com',
+  item_keywords: {
+    'Chocolate',
+    'Dog food'
+   }
+}
+
+// Items table example item
+{
+  name: 'Green & Blacks 85% Chocolate',
+  price: 10.09
+}
+```
 
 
 ## Technology Stack
