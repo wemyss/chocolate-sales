@@ -30,7 +30,7 @@ def price_is_lower_than_last_time(name, price):
 		print(e.response['Error']['Message'])
 	else:
 		if 'Item' in response:
-			prev_price = response['Item']['price']
+			prev_price = float(response['Item']['price'])
 			return price < prev_price
 		else:
 			return False
