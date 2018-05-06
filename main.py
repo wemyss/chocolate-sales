@@ -57,6 +57,8 @@ def get_data(url):
 	try:
 		r = requests.get(url)
 		data = r.json()
+		print('WWWWWWWWWWWWWWWW')
+		print(data)
 		return data
 	except JSONDecodeError:
 		print('ERROR: failed to fetch data from: ' + url)
@@ -72,6 +74,8 @@ def get_price_woolworths(url):
 	data = get_data(url)
 	if data is None:
 		return None
+	print('here')
+	print(data)
 	return float(data['Product']['Price'])
 
 def get_cheaper_vendor(prices):
