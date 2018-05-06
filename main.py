@@ -157,8 +157,8 @@ def notify_users(sale_items):
 	for user in users:
 		user_interested_items = [item for item in sale_items if user_wants_item(user, item)]
 		if len(user_interested_items) > 0:
-			# send_email(user['email'], generate_email(user_interested_items))
-			print(user['email'] + '   ' + str(user_interested_items))
+			send_email(user['email'], generate_email(user_interested_items))
+			# print(user['email'] + '   ' + str(user_interested_items))
 
 
 
@@ -172,20 +172,4 @@ def main():
 
 
 
-# main()
-
-params = {
-	'Filters': [],
-	'IsSpecial': True,
-	'Location':	'/shop/search/products?searchTerm=supercoat%20dog%20dry%20food',
-	'PageNumber': 1,
-	'PageSize':	24,
-	'SearchTerm': 'supercoat dog dry food',
-	'SortType':	'TraderRelevance',
-}
-r= requests.post('https://www.woolworths.com.au/apis/ui/Search/products',params)
-print(r.json())
-
-print(requests.get('https://www.woolworths.com.au/apis/ui/product/detail/516942').json())
-print(requests.get('https://www.woolworths.com.au/apis/ui/product/detail/517306').json())
-print(requests.get('https://www.woolworths.com.au/apis/ui/product/detail/516945').json())
+main()
