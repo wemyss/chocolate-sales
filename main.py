@@ -53,33 +53,26 @@ def get_users():
 # GATHER ITEM PRICES
 # ===========================================================
 
-def get_data(url):
+def get_price_coles(url):
 	try:
 		r = requests.get(url)
 		data = r.json()
-		print('WWWWWWWWWWWWWWWW')
-		print(data)
-		return data
-	except JSONDecodeError:
+		return float(data['catalogEntryView'][0]['p1']['o'])
+	except Exception as err:
 		print('ERROR: failed to fetch data from: ' + url)
+		print(err)
 		return None
-
-def get_price_coles(url):
-	data = get_data(url)
-	if data is None:
-		return None
-	return float(data['catalogEntryView'][0]['p1']['o'])
 
 def get_price_woolworths(url):
-	data = get_data(url)
-	data = get_data(url)
-	data = get_data(url)
-	data = get_data(url)
-	if data is None:
+	try:
+		r = requests.get(url)
+		data = r.json()
+		return float(data['Product']['Price'])
+	except Exception as err:
+		print('ERROR: failed to fetch data from: ' + url)
+		print(err)
 		return None
-	print('here')
-	print(data)
-	return float(data['Product']['Price'])
+
 
 def get_cheaper_vendor(prices):
 	cheaper_vendor = None
