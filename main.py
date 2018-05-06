@@ -72,6 +72,9 @@ def get_price_coles(url):
 
 def get_price_woolworths(url):
 	data = get_data(url)
+	data = get_data(url)
+	data = get_data(url)
+	data = get_data(url)
 	if data is None:
 		return None
 	print('here')
