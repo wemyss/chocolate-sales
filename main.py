@@ -185,3 +185,7 @@ params = {
 }
 r= requests.post('https://www.woolworths.com.au/apis/ui/Search/products',params)
 print(r.json())
+
+print(requests.get('https://www.woolworths.com.au/apis/ui/product/detail/516942').json())
+print(requests.get('https://www.woolworths.com.au/apis/ui/product/detail/517306').json())
+print(requests.get('https://www.woolworths.com.au/apis/ui/product/detail/516945').json())
