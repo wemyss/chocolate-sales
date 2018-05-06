@@ -97,12 +97,14 @@ def get_items_on_sale(data):
 
 
 		cheaper_vendor = get_cheaper_vendor(prices)
-		price = prices[cheaper_vendor]
 
-		if cheaper_vendor is not None and price_is_lower_than_last_time(item['name'], price):
-			sale_items.append({ 'name': item['name'], 'price': price, 'vendor': cheaper_vendor })
+		if cheaper_vendor is not None:
+			price = prices[cheaper_vendor]
 
-		update_price(item['name'], price)
+			if price_is_lower_than_last_time(item['name'], price):
+				sale_items.append({ 'name': item['name'], 'price': price, 'vendor': cheaper_vendor })
+
+			update_price(item['name'], price)
 
 	return sale_items
 
@@ -155,8 +157,8 @@ def notify_users(sale_items):
 	for user in users:
 		user_interested_items = [item for item in sale_items if user_wants_item(user, item)]
 		if len(user_interested_items) > 0:
-			send_email(user['email'], generate_email(user_interested_items))
-			# print(user['email'] + '   ' + str(user_interested_items))
+			# send_email(user['email'], generate_email(user_interested_items))
+			print(user['email'] + '   ' + str(user_interested_items))
 
 
 
