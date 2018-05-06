@@ -52,19 +52,33 @@ def get_users():
 
 # GATHER ITEM PRICES
 # ===========================================================
+
+def get_data(url):
+	try:
+		r = requests.get(url)
+		data = r.json()
+		return data
+	except JSONDecodeError:
+		print('ERROR: failed to fetch data from: ' + url)
+		return None
+
 def get_price_coles(url):
-	r = requests.get(url)
-	data = r.json()
+	data = get_data(url)
+	if data is None:
+		return None
 	return float(data['catalogEntryView'][0]['p1']['o'])
 
 def get_price_woolworths(url):
-	r = requests.get(url)
-	data = r.json()
+	data = get_data(url)
+	if data is None:
+		return None
 	return float(data['Product']['Price'])
 
 def get_cheaper_vendor(prices):
 	cheaper_vendor = None
 	for vendor, price in prices.items():
+		if price is None:
+			continue
 		if cheaper_vendor is None or price < prices[cheaper_vendor]:
 			cheaper_vendor = vendor
 	return cheaper_vendor
@@ -85,7 +99,7 @@ def get_items_on_sale(data):
 		cheaper_vendor = get_cheaper_vendor(prices)
 		price = prices[cheaper_vendor]
 
-		if price_is_lower_than_last_time(item['name'], price):
+		if cheaper_vendor is not None and price_is_lower_than_last_time(item['name'], price):
 			sale_items.append({ 'name': item['name'], 'price': price, 'vendor': cheaper_vendor })
 
 		update_price(item['name'], price)
@@ -142,7 +156,7 @@ def notify_users(sale_items):
 		user_interested_items = [item for item in sale_items if user_wants_item(user, item)]
 		if len(user_interested_items) > 0:
 			send_email(user['email'], generate_email(user_interested_items))
-			# print(user['email'] + '   ' + generate_email(user_interested_items) + '\n')
+			# print(user['email'] + '   ' + str(user_interested_items))
 
 
 
