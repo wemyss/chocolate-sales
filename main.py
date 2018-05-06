@@ -180,8 +180,8 @@ params = {
 	'Location':	'/shop/search/products?searchTerm=supercoat%20dog%20dry%20food',
 	'PageNumber': 1,
 	'PageSize':	24,
-	'SearchTerm': 'supercoat dog dry food'
-	'SortType':	'TraderRelevance'
+	'SearchTerm': 'supercoat dog dry food',
+	'SortType':	'TraderRelevance',
 }
 r= requests.post('https://www.woolworths.com.au/apis/ui/Search/products',params)
 print(r.json())
