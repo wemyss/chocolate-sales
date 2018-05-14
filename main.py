@@ -1,7 +1,8 @@
 import boto3
 import json
 import os
-import requests
+from botocore.vendored import requests
+from botocore.exceptions import ClientError
 from decimal import *
 
 
@@ -9,8 +10,8 @@ from decimal import *
 # ===========================================================
 db = boto3.resource(
 	'dynamodb',
-	aws_access_key_id = os.environ.get('AWS_ACCESS_KEY_ID'),
-	aws_secret_access_key = os.environ.get('AWS_SECRET_ACCESS_KEY'),
+	aws_access_key_id = os.environ.get('MY_AWS_ACCESS_KEY_ID'),
+	aws_secret_access_key = os.environ.get('MY_AWS_SECRET_ACCESS_KEY'),
 	region_name = 'ap-southeast-2'
 )
 items_table = db.Table('sams-sales')
@@ -39,6 +40,7 @@ def update_price(name, price):
 	'''
 	Update the previous price of the item
 	'''
+	print('updating price for %s to $%s' % (name, price))
 	items_table.put_item(
 		Item = {
 			'name': name,
@@ -158,18 +160,16 @@ def notify_users(sale_items):
 		user_interested_items = [item for item in sale_items if user_wants_item(user, item)]
 		if len(user_interested_items) > 0:
 			send_email(user['email'], generate_email(user_interested_items))
-			# print(user['email'] + '   ' + str(user_interested_items))
+			print('sent email to ' + user['email'])
 
 
 
 # MAIN
 # ===========================================================
-def main():
+def lambda_handler(event, context):
 	data = json.load(open('items.json'))
 	sale_items = get_items_on_sale(data)
 	if len(sale_items) > 0:
+		print(sale_items)
 		notify_users(sale_items)
 
-
-
-main()
