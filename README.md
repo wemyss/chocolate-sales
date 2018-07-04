@@ -7,7 +7,7 @@
 
 ## Overview
 
-Simple python script that runs on a heroku scheduled worker once a day - sending emails to registered users that are interested in particular items being on sale.
+Simple python script that runs on a aws lambda function once a day - sending emails to registered users that are interested in particular items being on sale.
 
 Uses DynamoDB to store the previous price so we don't continually send emails and we can detect price drops.
 
@@ -32,11 +32,22 @@ Uses DynamoDB to store the previous price so we don't continually send emails an
 
 ## Technology Stack
 - Python 3
-- Heroku Work Scheduler
 - AWS DynamoDB
+- AWS Lambda
 - Mailgun
 
 ## Notes
 - For sandbox mailgun domains you can't send an email to whole mailing list AFAIK. Current workaround is to send an email to each individual using a loop.
-- Have to use some kind of persistant storage to, i.e. DynamoDB, to determine whether or not we have recently sent an email about the same sale.
 - Coles API endpoint and object retrieval is hardcoded, don't know how often / if this changes
+
+
+## Woolworths Steps
+1. Search for product
+2. Click on product
+3. Copy product stockcode from url (can also see it in networks tab - devtools)
+
+## Coles Steps
+1. Open devtools
+2. Search for product
+3. Click on product to go to details page
+4. Find JSON api request for product (uses prefix as listed in `items.json`)
