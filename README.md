@@ -1,10 +1,5 @@
 # Supermarket sales email notifications
 
-<img src="http://i6.goodness-direct.co.uk/d/591836b.jpg" alt="Dark 85% Green & Blacks Chocolate" height="300px"></img>
-<img src="https://cdn0.woolworths.media/content/wowproductimages/large/516942.jpg" alt="Supercoat Active Dry Dog Food" height="300px"></img>
-
----
-
 ## Overview
 
 Simple python script that runs on a aws lambda function once a day - sending emails to registered users that are interested in particular items being on sale.
